@@ -133,4 +133,153 @@
       font-size: 13px;
       color: #4a5568;
       display: flex;
-    
+justify-content: space-between;
+    }
+
+    @media (max-width: 480px) {
+      .card { padding: 18px; border-radius: 10px; }
+      h1 { font-size: 18px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="card" role="main" aria-labelledby="login-title">
+    <h1 id="login-title">Đăng nhập</h1>
+    <p class="lead">Đăng nhập để tiếp tục vào ứng dụng của bạn</p>
+
+    <!-- Thay action thành đường dẫn backend của bạn -->
+    <form id="loginForm" novalidate>
+      <div class="form-group">
+        <label for="username">Tên đăng nhập / email</label>
+        <input id="username" name="username" type="text" autocomplete="username" required
+               placeholder="Nhập tên đăng nhập hoặc email" />
+        <div id="usernameError" class="error" aria-live="polite"></div>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Mật khẩu</label>
+        <div style="position:relative;">
+          <input id="password" name="password" type="password" autocomplete="current-password" required
+                 placeholder="Nhập mật khẩu" />
+          <label for="togglePass" class="show-pass" style="position:absolute; right:6px; top:8px;">
+            <input id="togglePass" type="checkbox" style="vertical-align:middle;" /> Hiện
+          </label>
+        </div>
+        <div id="passwordError" class="error" aria-live="polite"></div>
+      </div>
+
+      <div class="row" style="margin-bottom:6px;">
+        <label class="checkbox">
+          <input id="remember" name="remember" type="checkbox" />
+          Ghi nhớ đăng nhập
+        </label>
+        <a href="#" id="forgotLink">Quên mật khẩu?</a>
+      </div>
+
+      <div class="actions">
+        <button type="submit" class="btn-primary">Đăng nhập</button>
+      </div>
+
+      <div class="helper" id="formHelper" aria-live="polite"></div>
+    </form>
+
+    <div class="footer-links">
+      <span>Chưa có tài khoản? <a href="#">Đăng ký</a></span>
+      <span><a href="#">Trợ giúp</a></span>
+    </div>
+  </main>
+
+  <script>
+    // JS: validation, toggle mật khẩu, xử lý submit (ví dụ)
+    (function(){
+      const form = document.getElementById('loginForm');
+      const username = document.getElementById('username');
+      const password = document.getElementById('password');
+      const usernameError = document.getElementById('usernameError');
+      const passwordError = document.getElementById('passwordError');
+      const helper = document.getElementById('formHelper');
+      const togglePass = document.getElementById('togglePass');
+      const demoBtn = document.getElementById('demoBtn');
+
+      togglePass.addEventListener('change', () => {
+        password.type = togglePass.checked ? 'text' : 'password';
+      });
+
+      demoBtn.addEventListener('click', () => {
+        // điền demo để test
+        username.value = 'demo@example.com';
+password.value = 'demo1234';
+        helper.textContent = 'Đã điền thông tin demo. Nhấn "Đăng nhập" để gửi.';
+      });
+
+      function validate() {
+        let ok = true;
+        usernameError.textContent = '';
+        passwordError.textContent = '';
+        helper.textContent = '';
+
+        if (!username.value.trim()) {
+          usernameError.textContent = 'Vui lòng nhập tên đăng nhập hoặc email.';
+          ok = false;
+        } else if (username.value.includes(' ')) {
+          usernameError.textContent = 'Không được có khoảng trắng trong tên đăng nhập.';
+          ok = false;
+        }
+
+        if (!password.value) {
+          passwordError.textContent = 'Vui lòng nhập mật khẩu.';
+          ok = false;
+        } else if (password.value.length < 4) {
+          passwordError.textContent = 'Mật khẩu phải có ít nhất 4 ký tự.';
+          ok = false;
+        }
+
+        return ok;
+      }
+
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        if (!validate()) return;
+
+        // Ví dụ: gửi fetch đến backend (thay URL bằng endpoint thực tế)
+        // Ở đây chỉ mô phỏng (không thực sự gửi)
+        helper.textContent = 'Đang xử lý...';
+
+        // Nếu muốn tích hợp thật, bỏ comment phần dưới và chỉnh URL + body theo backend của bạn:
+        /*
+        fetch('/api/auth/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            username: username.value,
+            password: password.value,
+            remember: document.getElementById('remember').checked
+          })
+        })
+        .then(r => r.json())
+        .then(data => {
+          if (data.success) {
+            helper.textContent = 'Đăng nhập thành công. Chuyển hướng...';
+            // lưu token, chuyển trang, ...
+            window.location.href = '/dashboard';
+          } else {
+            helper.textContent = '';
+            passwordError.textContent = data.message || 'Đăng nhập thất bại.';
+          }
+        })
+        .catch(err => {
+          helper.textContent = '';
+          passwordError.textContent = 'Có lỗi xảy ra. Vui lòng thử lại.';
+          console.error(err);
+        });
+        */
+
+        // Mô phỏng delay thành công
+        setTimeout(() => {
+          helper.textContent = 'Đăng nhập (mô phỏng) thành công! Bạn có thể thay bằng fetch tới backend.';
+        }, 700);
+      });
+    })();
+  </script>
+</body>
+</html>
