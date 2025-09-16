@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Đăng nhập</title>
+  <style>
+    /* Reset nhẹ */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background: linear-gradient(135deg, #f0f4ff 0%, #f7fff4 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .card {
+      width: 100%;
+      max-width: 420px;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 6px 30px rgba(20,30,60,0.12);
+      padding: 28px;
+    }
+
+    h1 {
+      font-size: 20px;
+      margin-bottom: 8px;
+      color: #102a43;
+    }
+    p.lead {
+      font-size: 13px;
+      color: #446;
+      margin-bottom: 18px;
+    }
+
+    .form-group { margin-bottom: 14px; }
+    label {
+      display: block;
+      font-size: 13px;
+      margin-bottom: 6px;
+      color: #253858;
+    }
+
+    input[type="text"],
+    input[type="password"],
+    input[type="email"] {
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: 8px;
+      border: 1px solid #d9e2ec;
+      background: #fbfdff;
+      font-size: 14px;
+      outline: none;
+      transition: border-color .15s, box-shadow .15s;
+    }
+    input:focus { border-color: #6c8cff; box-shadow: 0 0 0 4px rgba(108,140,255,0.08); }
+
+    .row {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .checkbox {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      font-size: 13px;
+      color: #354;
+    }
+
+    .actions {
+      margin-top: 14px;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    button {
+      cursor: pointer;
+      border: none;
+      padding: 10px 14px;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    .btn-primary {
+      background: linear-gradient(90deg,#6c8cff,#4db3ff);
+      color: white;
+      flex: 1;
+      box-shadow: 0 6px 18px rgba(76,140,255,0.18);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: #335;
+      border: 1px solid #e2e8f0;
+      padding: 9px 12px;
+      border-radius: 10px;
+      font-weight: 600;
+    }
+
+    .helper {
+      margin-top: 10px;
+      font-size: 13px;
+      color: #6b7;
+      min-height: 18px;
+    }
+
+    .error {
+      color: #b91c1c;
+      font-size: 13px;
+      margin-top: 8px;
+    }
+
+    .show-pass {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: #556;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .footer-links {
+      margin-top: 12px;
+      font-size: 13px;
+      color: #4a5568;
+      display: flex;
