@@ -1,1 +1,75 @@
+password.value = 'demo1234';
+        helper.textContent = 'Đã điền thông tin demo. Nhấn "Đăng nhập" để gửi.';
+      });
 
+      function validate() {
+        let ok = true;
+        usernameError.textContent = '';
+        passwordError.textContent = '';
+        helper.textContent = '';
+
+        if (!username.value.trim()) {
+          usernameError.textContent = 'Vui lòng nhập tên đăng nhập hoặc email.';
+          ok = false;
+        } else if (username.value.includes(' ')) {
+          usernameError.textContent = 'Không được có khoảng trắng trong tên đăng nhập.';
+          ok = false;
+        }
+
+        if (!password.value) {
+          passwordError.textContent = 'Vui lòng nhập mật khẩu.';
+          ok = false;
+        } else if (password.value.length < 4) {
+          passwordError.textContent = 'Mật khẩu phải có ít nhất 4 ký tự.';
+          ok = false;
+        }
+
+        return ok;
+      }
+
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        if (!validate()) return;
+
+        // Ví dụ: gửi fetch đến backend (thay URL bằng endpoint thực tế)
+        // Ở đây chỉ mô phỏng (không thực sự gửi)
+        helper.textContent = 'Đang xử lý...';
+
+        // Nếu muốn tích hợp thật, bỏ comment phần dưới và chỉnh URL + body theo backend của bạn:
+        /*
+        fetch('/api/auth/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            username: username.value,
+            password: password.value,
+            remember: document.getElementById('remember').checked
+          })
+        })
+        .then(r => r.json())
+        .then(data => {
+          if (data.success) {
+            helper.textContent = 'Đăng nhập thành công. Chuyển hướng...';
+            // lưu token, chuyển trang, ...
+            window.location.href = '/dashboard';
+          } else {
+            helper.textContent = '';
+            passwordError.textContent = data.message || 'Đăng nhập thất bại.';
+          }
+        })
+        .catch(err => {
+          helper.textContent = '';
+          passwordError.textContent = 'Có lỗi xảy ra. Vui lòng thử lại.';
+          console.error(err);
+        });
+        */
+
+        // Mô phỏng delay thành công
+        setTimeout(() => {
+          helper.textContent = 'Đăng nhập (mô phỏng) thành công! Bạn có thể thay bằng fetch tới backend.';
+        }, 700);
+      });
+    })();
+  </script>
+</body>
+</html>
