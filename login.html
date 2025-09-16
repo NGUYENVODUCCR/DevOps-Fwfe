@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Đăng nhập</title>
   <style>
-    /* Reset nhẹ */
+ 
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
       font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
@@ -147,7 +147,7 @@ justify-content: space-between;
     <h1 id="login-title">Đăng nhập</h1>
     <p class="lead">Đăng nhập để tiếp tục vào ứng dụng của bạn</p>
 
-    <!-- Thay action thành đường dẫn backend của bạn -->
+    
     <form id="loginForm" novalidate>
       <div class="form-group">
         <label for="username">Tên đăng nhập / email</label>
@@ -190,7 +190,7 @@ justify-content: space-between;
   </main>
 
   <script>
-    // JS: validation, toggle mật khẩu, xử lý submit (ví dụ)
+    
     (function(){
       const form = document.getElementById('loginForm');
       const username = document.getElementById('username');
@@ -206,7 +206,7 @@ justify-content: space-between;
       });
 
       demoBtn.addEventListener('click', () => {
-        // điền demo để test
+        
         username.value = 'demo@example.com';
 password.value = 'demo1234';
         helper.textContent = 'Đã điền thông tin demo. Nhấn "Đăng nhập" để gửi.';
@@ -241,40 +241,8 @@ password.value = 'demo1234';
         e.preventDefault();
         if (!validate()) return;
 
-        // Ví dụ: gửi fetch đến backend (thay URL bằng endpoint thực tế)
-        // Ở đây chỉ mô phỏng (không thực sự gửi)
         helper.textContent = 'Đang xử lý...';
 
-        // Nếu muốn tích hợp thật, bỏ comment phần dưới và chỉnh URL + body theo backend của bạn:
-        /*
-        fetch('/api/auth/login', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            username: username.value,
-            password: password.value,
-            remember: document.getElementById('remember').checked
-          })
-        })
-        .then(r => r.json())
-        .then(data => {
-          if (data.success) {
-            helper.textContent = 'Đăng nhập thành công. Chuyển hướng...';
-            // lưu token, chuyển trang, ...
-            window.location.href = '/dashboard';
-          } else {
-            helper.textContent = '';
-            passwordError.textContent = data.message || 'Đăng nhập thất bại.';
-          }
-        })
-        .catch(err => {
-          helper.textContent = '';
-          passwordError.textContent = 'Có lỗi xảy ra. Vui lòng thử lại.';
-          console.error(err);
-        });
-        */
-
-        // Mô phỏng delay thành công
         setTimeout(() => {
           helper.textContent = 'Đăng nhập (mô phỏng) thành công! Bạn có thể thay bằng fetch tới backend.';
         }, 700);
