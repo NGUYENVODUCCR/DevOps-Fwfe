@@ -1,1 +1,75 @@
+justify-content: space-between;
+    }
 
+    @media (max-width: 480px) {
+      .card { padding: 18px; border-radius: 10px; }
+      h1 { font-size: 18px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="card" role="main" aria-labelledby="login-title">
+    <h1 id="login-title">Đăng nhập</h1>
+    <p class="lead">Đăng nhập để tiếp tục vào ứng dụng của bạn</p>
+
+    <!-- Thay action thành đường dẫn backend của bạn -->
+    <form id="loginForm" novalidate>
+      <div class="form-group">
+        <label for="username">Tên đăng nhập / email</label>
+        <input id="username" name="username" type="text" autocomplete="username" required
+               placeholder="Nhập tên đăng nhập hoặc email" />
+        <div id="usernameError" class="error" aria-live="polite"></div>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Mật khẩu</label>
+        <div style="position:relative;">
+          <input id="password" name="password" type="password" autocomplete="current-password" required
+                 placeholder="Nhập mật khẩu" />
+          <label for="togglePass" class="show-pass" style="position:absolute; right:6px; top:8px;">
+            <input id="togglePass" type="checkbox" style="vertical-align:middle;" /> Hiện
+          </label>
+        </div>
+        <div id="passwordError" class="error" aria-live="polite"></div>
+      </div>
+
+      <div class="row" style="margin-bottom:6px;">
+        <label class="checkbox">
+          <input id="remember" name="remember" type="checkbox" />
+          Ghi nhớ đăng nhập
+        </label>
+        <a href="#" id="forgotLink">Quên mật khẩu?</a>
+      </div>
+
+      <div class="actions">
+        <button type="submit" class="btn-primary">Đăng nhập</button>
+      </div>
+
+      <div class="helper" id="formHelper" aria-live="polite"></div>
+    </form>
+
+    <div class="footer-links">
+      <span>Chưa có tài khoản? <a href="#">Đăng ký</a></span>
+      <span><a href="#">Trợ giúp</a></span>
+    </div>
+  </main>
+
+  <script>
+    // JS: validation, toggle mật khẩu, xử lý submit (ví dụ)
+    (function(){
+      const form = document.getElementById('loginForm');
+      const username = document.getElementById('username');
+      const password = document.getElementById('password');
+      const usernameError = document.getElementById('usernameError');
+      const passwordError = document.getElementById('passwordError');
+      const helper = document.getElementById('formHelper');
+      const togglePass = document.getElementById('togglePass');
+      const demoBtn = document.getElementById('demoBtn');
+
+      togglePass.addEventListener('change', () => {
+        password.type = togglePass.checked ? 'text' : 'password';
+      });
+
+      demoBtn.addEventListener('click', () => {
+        // điền demo để test
+        username.value = 'demo@example.com';
